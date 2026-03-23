@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PsicoStudy — Plataforma de Estudos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">Ψ</div>
+      <span class="brand-name">PsicoStudy</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <span class="nav-icon">◈</span><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-section="flashcards">
+        <span class="nav-icon">⬡</span><span>Flashcards</span>
+      </a>
+      <a href="#" class="nav-item" data-section="teoristas">
+        <span class="nav-icon">◉</span><span>Teóricos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="quiz">
+        <span class="nav-icon">◇</span><span>Quiz</span>
+      </a>
+      <a href="#" class="nav-item" data-section="notas">
+        <span class="nav-icon">▣</span><span>Anotações</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-ring-label">Progresso</div>
+      <div class="sidebar-progress">
+        <div class="progress-bar-fill" id="sidebar-progress-fill"></div>
+      </div>
+      <span class="progress-text" id="sidebar-progress-text">0%</span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">☰</button>
+      <h1 class="page-title" id="page-title">Dashboard</h1>
+      <div class="topbar-right">
+        <div class="streak-badge" id="streak-badge">
+          <span>🔥</span><span id="streak-count">0</span> dias
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTIONS -->
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="section active" id="section-dashboard">
+      <div class="welcome-block">
+        <p class="welcome-sub">Bem-vindo(a) de volta</p>
+        <h2 class="welcome-title">O que vamos explorar <em>hoje</em>?</h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" id="stat-cards">
+          <span class="stat-number" id="stat-cards-count">0</span>
+          <span class="stat-label">Cards revisados</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-quiz-count">0</span>
+          <span class="stat-label">Quizzes feitos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-notes-count">0</span>
+          <span class="stat-label">Anotações</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-number" id="stat-score">—</span>
+          <span class="stat-label">Melhor pontuação</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="dash-card clickable" onclick="goToSection('flashcards')">
+          <div class="dash-card-icon">⬡</div>
+          <div>
+            <h3>Flashcards</h3>
+            <p>Revise conceitos fundamentais da psicologia com cartões interativos.</p>
+          </div>
+          <span class="dash-arrow">→</span>
+        </div>
+        <div class="dash-card clickable" onclick="goToSection('teoristas')">
+          <div class="dash-card-icon">◉</div>
+          <div>
+            <h3>Teóricos</h3>
+            <p>Conheça os principais pensadores e suas abordagens teóricas.</p>
+          </div>
+          <span class="dash-arrow">→</span>
+        </div>
+        <div class="dash-card clickable" onclick="goToSection('quiz')">
+          <div class="dash-card-icon">◇</div>
+          <div>
+            <h3>Quiz</h3>
+            <p>Teste seus conhecimentos com perguntas sobre psicologia.</p>
+          </div>
+          <span class="dash-arrow">→</span>
+        </div>
+        <div class="dash-card clickable" onclick="goToSection('notas')">
+          <div class="dash-card-icon">▣</div>
+          <div>
+            <h3>Anotações</h3>
+            <p>Organize seus estudos e crie resumos personalizados.</p>
+          </div>
+          <span class="dash-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <blockquote id="daily-quote"></blockquote>
+        <cite id="daily-author"></cite>
+      </div>
+    </section>
+
+    <!-- ===== FLASHCARDS ===== -->
+    <section class="section" id="section-flashcards">
+      <div class="section-header">
+        <h2>Flashcards</h2>
+        <p>Clique no cartão para revelar a definição</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="psicanálise">Psicanálise</button>
+        <button class="filter-btn" data-filter="cognitivo">Cognitivo</button>
+        <button class="filter-btn" data-filter="social">Social</button>
+        <button class="filter-btn" data-filter="desenvolvimento">Desenvolvimento</button>
+      </div>
+
+      <div class="flashcard-grid" id="flashcard-grid"></div>
+    </section>
+
+    <!-- ===== TEÓRICOS ===== -->
+    <section class="section" id="section-teoristas">
+      <div class="section-header">
+        <h2>Teóricos da Psicologia</h2>
+        <p>Os pensadores que moldaram a ciência da mente</p>
+      </div>
+
+      <div class="teoristas-grid" id="teoristas-grid"></div>
+
+      <!-- Modal -->
+      <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+          <button class="modal-close" id="modal-close">✕</button>
+          <div class="modal-body" id="modal-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ ===== -->
+    <section class="section" id="section-quiz">
+      <div class="section-header">
+        <h2>Quiz</h2>
+        <p>Teste seus conhecimentos</p>
+      </div>
+
+      <div class="quiz-container" id="quiz-container">
+        <div class="quiz-start" id="quiz-start">
+          <div class="quiz-start-icon">◇</div>
+          <h3>Pronto para o desafio?</h3>
+          <p>10 perguntas sobre psicologia. Boa sorte!</p>
+          <button class="btn-primary" id="start-quiz-btn">Iniciar Quiz</button>
+        </div>
+
+        <div class="quiz-play" id="quiz-play" style="display:none">
+          <div class="quiz-meta">
+            <span id="quiz-progress-label">Pergunta 1 / 10</span>
+            <span id="quiz-score-label">Pontos: 0</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+          </div>
+          <div class="question-card">
+            <p class="question-text" id="question-text"></p>
+          </div>
+          <div class="options-grid" id="options-grid"></div>
+          <button class="btn-primary" id="next-btn" style="display:none">Próxima →</button>
+        </div>
+
+        <div class="quiz-result" id="quiz-result" style="display:none">
+          <div class="result-icon">✦</div>
+          <h3 id="result-title"></h3>
+          <p class="result-score" id="result-score"></p>
+          <p id="result-message"></p>
+          <button class="btn-primary" id="restart-quiz-btn">Tentar novamente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NOTAS ===== -->
+    <section class="section" id="section-notas">
+      <div class="section-header">
+        <h2>Anotações</h2>
+        <p>Organize seus resumos e reflexões</p>
+      </div>
+
+      <div class="notes-toolbar">
+        <input class="notes-input-title" id="note-title" type="text" placeholder="Título da anotação..." />
+        <select class="notes-select" id="note-category">
+          <option value="geral">Geral</option>
+          <option value="psicanálise">Psicanálise</option>
+          <option value="cognitivo">Cognitivo</option>
+          <option value="social">Social</option>
+          <option value="desenvolvimento">Desenvolvimento</option>
+        </select>
+        <button class="btn-primary" id="save-note-btn">Salvar nota</button>
+      </div>
+
+      <textarea class="notes-textarea" id="note-content" placeholder="Escreva sua anotação aqui..."></textarea>
+
+      <div class="notes-list" id="notes-list"></div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
